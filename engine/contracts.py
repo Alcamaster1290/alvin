@@ -327,7 +327,7 @@ def export_trade_costs(
     # -- Documento raiz ---------------------------------------------------
     doc: dict[str, Any] = {
         "version": TRADE_COSTS_VERSION,
-        "caseId": case_id,
+        "caseId": case_id or str(uuid.uuid4()),
         "currency": "USD",
         "localCurrency": "PEN",
         "generatedAt": now.isoformat(),

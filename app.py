@@ -237,7 +237,7 @@ replicando exactamente las funciones `ROUND()` de Excel.
                 st.download_button(
                     label="Descargar trade-costs.v1 (JSON)",
                     data=costs_json,
-                    file_name=f"trade-costs-{costs_dict['caseId'][:8]}.json",
+                    file_name=f"trade-costs-{costs_dict['caseId'][:8]}.json" if costs_dict.get('caseId') else "trade-costs.json",
                     mime="application/json",
                     use_container_width=True,
                 )
