@@ -1,0 +1,13 @@
+{
+  "ad_valorem_rate": "0.06",
+  "isc_rate": "0",
+  "igv_rate": "0.16",
+  "ipm_rate": "0.02",
+  "insurance_rate": "0.012",
+  "insurance_fee_rate": "0.015",
+  "broker_commission_rate": "0.01",
+  "broker_min_usd": "100",
+  "igv_perception_rate": "0.035",
+  "standard_igv": "0.18",
+  "exchange_rate": "3.72"
+}

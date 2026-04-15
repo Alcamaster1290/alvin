@@ -1,0 +1,23 @@
+[
+  {"key": "seguro_permiso", "label": "Seguro / Permiso de importacion", "default": "0"},
+  {"key": "handling", "label": "Handling (manipuleo)", "default": "0"},
+  {"key": "descarga", "label": "Servicio de descarga", "default": "0"},
+  {"key": "traccion", "label": "Traccion de carga", "default": "0"},
+  {"key": "movimiento_carga", "label": "Movimiento de carga", "default": "0"},
+  {"key": "atencion_cliente", "label": "Atencion al cliente", "default": "0"},
+  {"key": "gastos_operativos", "label": "Gastos operativos", "default": "0"},
+  {"key": "almacenaje", "label": "Almacenaje en deposito", "default": "0"},
+  {"key": "cuadrilla", "label": "Cuadrilla de carga", "default": "0"},
+  {"key": "servicios_admin", "label": "Servicios administrativos", "default": "0"},
+  {"key": "seguro_contenedor", "label": "Seguro de contenedor", "default": "0"},
+  {"key": "posicionamiento", "label": "Posicionamiento de carga", "default": "0"},
+  {"key": "transporte_interno", "label": "Transporte interno (ultimo tramo)", "default": "0"},
+  {"key": "precintos", "label": "Precintos / Sellos", "default": "0"},
+  {"key": "gastos_varios", "label": "Gastos varios", "default": "0"},
+  {"key": "comision_agente", "label": "Comision agente de aduana", "default": "0"},
+  {"key": "devolucion_contenedor", "label": "Devolucion de contenedor", "default": "0"},
+  {"key": "aforo_fisico", "label": "Gastos de aforo fisico", "default": "0"},
+  {"key": "almacen_extra", "label": "Almacenaje extra / sobreestadia", "default": "0"},
+  {"key": "otros_1", "label": "Otros gastos 1", "default": "0"},
+  {"key": "otros_2", "label": "Otros gastos 2", "default": "0"}
+]
