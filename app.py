@@ -1,8 +1,9 @@
 """
+ALVIN — Asistente Logistico Virtual Inteligente
 Expediente de Costos de Importacion / Exportacion
-ADEX - Data Trade
+ADEX Data Trade
 
-Entry point: streamlit run import_cost_calculator/app.py
+Entry point: streamlit run app.py
 """
 
 import sys
