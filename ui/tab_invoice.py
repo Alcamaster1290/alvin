@@ -48,45 +48,66 @@ def render(state_key: str = "invoice"):
     with col_tooltip:
         display_tooltip("fob")
 
-    # Import from trade-case.v1 or legacy palletizer JSON
+    # ── Import from Palletizer or add rows manually ──
     col_import, col_add = st.columns(2)
-    with col_import:
-        uploaded = st.file_uploader(
-            "Importar caso (trade-case.v1 o JSON Palletizer)",
-            type=["json"],
-            key=f"{state_key}_json_upload",
-            help="Carga un trade-case.v1 desde ADEX Palletizer o un JSON legacy para pre-llenar los SKUs",
-        )
-        if uploaded is not None:
-            try:
-                raw = json.load(uploaded)
-                uploaded.seek(0)
 
-                if raw.get("version") == "trade-case.v1":
-                    case_id, loaded_skus, meta = load_trade_case(raw)
-                    rows = []
-                    for s in loaded_skus:
-                        rows.append({
-                            "Producto": s.name,
-                            "Unidad": s.unit,
-                            "Cantidad": int(s.quantity),
-                            "Precio FOB Unitario (USD)": float(s.fob_unit_price),
-                        })
-                    st.session_state[state_key]["skus_df"] = pd.DataFrame(rows)
-                    st.session_state["trade_case_id"] = case_id
-                    st.session_state["trade_case_meta"] = meta
-                    st.success(f"{len(rows)} SKUs importados (caso {case_id[:8]}...)")
-                else:
-                    palletizer_skus = _load_from_palletizer_json(uploaded)
-                    if palletizer_skus:
-                        st.session_state[state_key]["skus_df"] = pd.DataFrame(palletizer_skus)
-                        st.success(f"{len(palletizer_skus)} SKUs importados del Palletizer (formato legacy)")
+    with col_import:
+        with st.expander("Importar productos desde ADEX Palletizer", expanded=False):
+            st.markdown(
+                "Si ya armaste tu caso de embalaje en **ADEX Palletizer**, "
+                "puedes cargar el archivo JSON que exportaste y los productos "
+                "se completaran automaticamente."
+            )
+            st.caption(
+                "En Palletizer, usa el boton **\"Enviar a Costos\"** o "
+                "**\"Exportar JSON\"** para descargar el archivo."
+            )
+            uploaded = st.file_uploader(
+                "Arrastra o selecciona el archivo JSON",
+                type=["json"],
+                key=f"{state_key}_json_upload",
+            )
+            if uploaded is not None:
+                try:
+                    raw = json.load(uploaded)
+                    uploaded.seek(0)
+
+                    if raw.get("version") == "trade-case.v1":
+                        case_id, loaded_skus, meta = load_trade_case(raw)
+                        rows = []
+                        for s in loaded_skus:
+                            rows.append({
+                                "Producto": s.name,
+                                "Unidad": s.unit,
+                                "Cantidad": int(s.quantity),
+                                "Precio FOB Unitario (USD)": float(s.fob_unit_price),
+                            })
+                        st.session_state[state_key]["skus_df"] = pd.DataFrame(rows)
+                        st.session_state["trade_case_id"] = case_id
+                        st.session_state["trade_case_meta"] = meta
+                        st.success(
+                            f"{len(rows)} producto(s) importados correctamente "
+                            f"desde Palletizer."
+                        )
                     else:
-                        st.warning("No se encontraron SKUs en el archivo JSON")
-            except ValueError as e:
-                st.error(f"Error de formato: {e}")
-            except Exception as e:
-                st.error(f"Error al leer el archivo: {e}")
+                        palletizer_skus = _load_from_palletizer_json(uploaded)
+                        if palletizer_skus:
+                            st.session_state[state_key]["skus_df"] = pd.DataFrame(
+                                palletizer_skus
+                            )
+                            st.success(
+                                f"{len(palletizer_skus)} producto(s) importados. "
+                                f"Completa el **Precio FOB Unitario** de cada uno."
+                            )
+                        else:
+                            st.warning(
+                                "No se encontraron productos en el archivo. "
+                                "Verifica que sea un JSON exportado de Palletizer."
+                            )
+                except ValueError as e:
+                    st.error(f"El archivo no tiene el formato esperado: {e}")
+                except Exception as e:
+                    st.error(f"No se pudo leer el archivo: {e}")
 
     with col_add:
         num_rows = st.number_input(
