@@ -13,9 +13,6 @@ from pathlib import Path
 _APP_DIR = Path(__file__).resolve().parent
 if str(_APP_DIR) not in sys.path:
     sys.path.insert(0, str(_APP_DIR))
-_PROJECT_DIR = _APP_DIR.parent
-if str(_PROJECT_DIR) not in sys.path:
-    sys.path.insert(0, str(_PROJECT_DIR))
 
 import streamlit as st
 from decimal import Decimal

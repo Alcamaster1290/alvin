@@ -19,3 +19,7 @@ htmlcov/
 
 *.xlsx
 .streamlit/secrets.toml
+
+# OS
+.DS_Store
+Thumbs.db
