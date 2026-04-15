@@ -45,43 +45,38 @@ def main():
 
     # Sidebar
     with st.sidebar:
-        # Toggle para colapsar contenido del sidebar
         st.markdown(
             """
             <style>
             [data-testid="stSidebar"] [data-testid="stMarkdown"] {
                 font-size: 0.92rem;
             }
-            .sidebar-toggle { cursor: pointer; user-select: none; }
             </style>
             """,
             unsafe_allow_html=True,
         )
 
-        sidebar_expanded = st.toggle("Mostrar panel lateral", value=True, key="sidebar_toggle")
+        st.markdown("#### Ecosistema ADEX")
 
-        if sidebar_expanded:
-            st.markdown("#### Ecosistema ADEX")
+        st.link_button(
+            "SisLoPe - Sistema Logistico del Peru",
+            "https://sis-lo-pe.vercel.app",
+            use_container_width=True,
+            help="Mapa interactivo de nodos logisticos del Peru",
+        )
 
-            sislope_url = "https://sis-lo-pe.vercel.app"
-            st.link_button(
-                "SisLoPe - Sistema Logistico del Peru",
-                sislope_url,
-                use_container_width=True,
-            )
+        st.link_button(
+            "Pallet Solver - Paletizacion 3D",
+            "https://adex-palletizer.vercel.app",
+            use_container_width=True,
+            help="Calculadora de paletizacion y contenedores",
+        )
 
-            palletizer_url = "https://adex-palletizer.vercel.app"
-            st.link_button(
-                "Pallet Solver - Paletizacion 3D",
-                palletizer_url,
-                use_container_width=True,
-            )
+        st.markdown("---")
 
-            st.markdown("---")
-
-            with st.expander("Acerca de este expediente", expanded=True):
-                st.markdown(
-                    """
+        with st.expander("Acerca de este expediente", expanded=True):
+            st.markdown(
+                """
 **Expediente de Costos de Importacion y Exportacion**
 
 Herramienta de calculo tecnico de costos aterrizados para
@@ -115,14 +110,14 @@ replicando exactamente las funciones `ROUND()` de Excel.
 - Arancel Nacional de Aduanas
 
 **Integraciones:**
-- Importar caso desde ADEX Palletizer (trade-case.v1)
-- Exportar expediente completo (trade-costs.v1 o Excel)
-                    """
-                )
+- Importar caso desde ADEX Palletizer
+- Exportar expediente completo (JSON o Excel)
+                """
+            )
 
-            with st.expander("Formulas clave"):
-                st.markdown(
-                    """
+        with st.expander("Formulas clave"):
+            st.markdown(
+                """
 | Concepto | Formula |
 |----------|---------|
 | CIF | FOB + Flete + Seguro |
@@ -134,10 +129,10 @@ replicando exactamente las funciones `ROUND()` de Excel.
 | Agente | MAX(CIF x %, min USD) |
 | Prorrateo | Costo x (FOB_sku / FOB_total) |
 | Precio | Costo / (1 - Margen%) |
-                    """
-                )
+                """
+            )
 
-            st.markdown("---")
+        st.markdown("---")
 
         st.caption("ADEX Data Trade v1.0 | by Alvaro Caceres")
 
